@@ -1,18 +1,14 @@
 name = "Joysticks"
 uuid = "82f05805-4863-42dc-b1a7-0852bd62c632"
 authors = ["Uwe Fechner <fechner@aenarete.eu> and contributors"]
-version = "0.1.4"
+version = "0.2.0"
 
 [deps]
 GLFW = "f7f18e0c-5ee9-5ccd-a5bf-e8befd85ed98"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
-Observables = "510215fc-4207-5dde-b226-833fc4488ee2"
-Reexport = "189a3867-3050-52da-a836-e630ba90ab69"
 
 [compat]
 GLFW = "3"
-Observables = "0.4, 0.5"
-Reexport = "1"
 julia = "1"
 
 [extras]
