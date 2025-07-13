@@ -92,7 +92,15 @@ end
 
 
 function get_gamepad_state(gp; deadzone=DEFAULT_DEADZONE)
+    if isnothing(gp)
+        return nothing, nothing
+    end
+
     state = GLFW.GetGamepadState(gp)
+
+    if isnothing(state)
+        return nothing, nothing
+    end
 
     ax = GamepadAxesState(state.axes[GLFW.GAMEPAD_AXIS_LEFT_X+1],
                           state.axes[GLFW.GAMEPAD_AXIS_LEFT_Y+1],
