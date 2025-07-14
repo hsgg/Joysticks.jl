@@ -22,7 +22,7 @@ SOFTWARE. =#
 
 module Joysticks
 
-export find_gamepad, get_gamepad_state
+export find_gamepad, get_gamepad_state, put_away_gamepad
 
 using Observables
 
@@ -207,6 +207,12 @@ function get_gamepad_state(gp::Ptr{SDL_GameController}; deadzone=DEFAULT_DEADZON
     return ax, btn
 end
 
+
+put_away_gamepad(::Nothing) = nothing
+
+put_away_gamepad(::GLFW.Joystick) = nothing
+
+put_away_gamepad(gp::Ptr{SDL_GameController}) = SDL_GameControllerClose(gp)
 
 
 end
