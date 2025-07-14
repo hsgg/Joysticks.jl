@@ -95,7 +95,6 @@ end
 
 function find_gamepad(; glfw=false)
     if glfw
-        println("Using GLFW3.")
         for joy in instances(GLFW.Joystick)
             if GLFW.JoystickIsGamepad(joy)
                 name = GLFW.GetGamepadName(joy)
@@ -104,8 +103,10 @@ function find_gamepad(; glfw=false)
             end
         end
 
-    else
-        println("Using SDL2.")
+    else  # SDL2
+        if SDL_NumJoysticks() == 0
+            SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER)
+        end
 
         if SDL_WasInit(SDL_INIT_GAMECONTROLLER) == 0
             ret = SDL_Init(SDL_INIT_GAMECONTROLLER)
@@ -122,6 +123,8 @@ function find_gamepad(; glfw=false)
                 return joy
             end
         end
+
+        println("No game controllers found: NumJoysticks = $(SDL_NumJoysticks())")
     end
 
     return nothing
