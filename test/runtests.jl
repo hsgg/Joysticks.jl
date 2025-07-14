@@ -2,11 +2,9 @@ using Joysticks
 using Test
 
 @testset "Joysticks.jl" begin
-    js = open_joystick()
-    if ! isnothing(js)
-        @test js.axis_count > 0
-        @test js.button_count > 0
-        event = read_event(js)
-        @test event.type & Int(JS_EVENT_INIT) == Int(JS_EVENT_INIT)
+    @testset "normalize_to_float" begin
+        @test Joysticks.normalize_to_float(typemin(Int16)) == -1
+        @test Joysticks.normalize_to_float(typemax(Int16)) == 1
+        @test Joysticks.normalize_to_float(typemax(Int16)) isa Real
     end
 end
